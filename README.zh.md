@@ -29,7 +29,7 @@ sprintf(formatedString, …args)
 ### flag
  - 	`0`
 	
-	當內容的長度比指定長度（width）短時，以 `0` 
+	當內容的長度比指定長度（width）短時，以 `0` 填充
 	
  - 	`#`
 	
