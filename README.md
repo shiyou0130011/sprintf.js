@@ -203,40 +203,39 @@ The default behavior is for each formatting verb to format successive arguments 
 sprintf("%[2]d", 11, 22)	// return "22"
 ```
 
-上例中， `[2]` 表示輸出的參數為第 2 個參數。
-
-而輸出長度、浮點數的精確度亦可以參數來決定值，此時要加 * 號，即 `[]*` ，例如
+The notation before a '*' (`[]*`) for a width or precision selects the argument index holding the value.
+For instance: 
 
 ``` javascript
 sprintf("%[2]*.[4]*[3]f", 11, 12, 13.123, 14, 15)
 ```
 
-等同於
+It is the same as
 
 ``` javascript
 sprintf("%12.14[3]f")
 ```
 
-另外，若有指定參數（無論是使用 `[]` 指定輸出參數還是 `[]*` 指定長度或精確度）都會影響下一個輸出參數。
-例如：
+Also, after processing a bracketed expression [n], subsequent verbs will use arguments n+1, n+2, etc. unless otherwise directed.
+For example: 
 
 ``` javascript
 sprintf("%[2]d	%d", 100, 200, 300)
 ```
 
-等同於
+It is the same as following code: 
 
 ``` javascript
 sprintf("%[2]d	%[3]d", 100, 200, 300)
 ```
 	
-而指定長度／精確度的話
+For setting width or precision: 
 
 ``` javascript
 sprintf("%[2]*d", 100, 200, 300)
 ```
 
-等同於
+It is the same as following code: 
 
 ``` javascript	
 sprintf("%[2]*[3]d", 100, 200, 300)
