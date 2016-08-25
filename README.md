@@ -4,7 +4,9 @@
 sprintf.js is a javascript library used for formating string.
 The idea is from `fmt.Sprintf` of GoLang.
 
-The Chinese Documention please read [README.zh.md](README.zh.md)
+The Chinese Documention please read [README.zh.md](README.zh.md).
+
+JSDoc can be found in [http://shiyou0130011.github.io/sprintf.js/doc/](http://shiyou0130011.github.io/sprintf.js/doc/).
 
 ## Usage
 

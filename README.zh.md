@@ -4,7 +4,9 @@
 sprintf.js 是用於格式化字串的 javascript library
 參考自 golang 的 `fmt.Sprintf`。
 
-英語文檔請閱讀 [README.md](README.md)
+英語文檔請閱讀 [README.md](README.md)。
+
+JSDOC 則是在 [http://shiyou0130011.github.io/sprintf.js/doc/](http://shiyou0130011.github.io/sprintf.js/doc/)。
 
 ## 使用
 
