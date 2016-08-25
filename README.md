@@ -35,7 +35,7 @@ The formating rule is:
 	
  - 	`#`
 	
-	請參考格式指定碼的 `v` 
+	Please see `v` in “Format Specifier”.
 	
 	
  - 	` ` (space)
@@ -56,7 +56,7 @@ The formating rule is:
 
 ### Format Specifier
 
-sprintf 允許下列格式指定碼
+`sprintf()` allows following format specifiers: 
 
 #### For Numbers	
 
@@ -112,9 +112,15 @@ sprintf 允許下列格式指定碼
 
  - 	`c`
 
-	如果參數是數字，則將其視為 char code 轉為 char；
-	若為字串，則取第一個字元。
-
+	If the argument is a number, it will be seen as a char code and be converted to the char;
+	If it is a string, it will return the first char of the string.
+	
+	For example: 
+	
+	``` javascript
+	sprintf("%c", 65)	// return "A"
+	sprintf("%c", "ABC")	// return "A"
+	```
 
 #### For String
 

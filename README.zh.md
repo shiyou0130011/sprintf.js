@@ -106,17 +106,24 @@ sprintf 允許下列格式指定碼
 
 	如果參數是數字，則將其視為 char code 轉為 char；
 	若為字串，則取第一個字元。
-
- - 	`q`
-
-	若參數是數字，將其視為 char code 轉為 char，再加上單引號（`''`），等同於 `sprintf("'%c'", arugment)`；
-	若為字串，則取第一個字元，等同於 `sprintf("\"%c\"", argument)`
+	
+	例：
+	
+	``` javascript
+	sprintf("%c", 65)	// return "A"
+	sprintf("%c", "ABC")	// return "A"
+	```
 
 #### 字串相關
 
 - 	`s`
 
 	輸出字串。
+
+ - 	`q`
+
+	若參數是數字，將其視為 char code 轉為 char，再加上單引號（`''`），等同於 `sprintf("'%c'", arugment)`；
+	若為字串，則取第一個字元，等同於 `sprintf("\"%c\"", argument)`
 
 
 #### 布林（布尔）值相關
