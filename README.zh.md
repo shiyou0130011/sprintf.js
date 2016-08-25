@@ -1,7 +1,10 @@
 # sprintf.js
+[![Apache 2.0 License](https://img.shields.io/badge/listence-apache%202.0-%23CB2533.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 sprintf.js 是用於格式化字串的 javascript library
 參考自 golang 的 `fmt.Sprintf`。
+
+英語文檔請閱讀 [README.md](README.md)
 
 ## 使用
 

@@ -1,7 +1,10 @@
-# sprintf.js
+# sprintf.js 
+[![Apache 2.0 License](https://img.shields.io/badge/listence-apache%202.0-%23CB2533.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 sprintf.js is a javascript library used for formating string.
 The idea is from `fmt.Sprintf` of GoLang.
+
+The Chinese Documention please read [README.zh.md](README.zh.md)
 
 ## Usage
 
