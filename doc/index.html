@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#sprintf">sprintf</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>sprintf.js</h1><p><a href="http://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/listence-apache%202.0-%23CB2533.svg" alt="Apache 2.0 License"></a></p>
+<p>sprintf.js is a javascript library used for formating string.
+The idea is from <code>fmt.Sprintf</code> of GoLang.</p>
+<h2>Usage</h2><p>Note: This project is not a javascript model project. To use it please add the following code into your web page.</p>
+<pre class="prettyprint source lang-HTML"><code>&lt;script src=&quot;/path/of/sprintf.js&quot;>&lt;/script></code></pre><h2>Printing</h2><pre class="prettyprint source lang-javascript"><code>sprintf(formatedString, …args)</code></pre><p>This function is similar as <a href="https://golang.org/pkg/fmt/#Sprintf"><code>fmt.Sprintf</code> of GoLang</a>, <a href="https://www-s.acm.illinois.edu/webmonkeys/book/c_guide/2.12.html#printf"><code>sprintf()</code> of C language</a>, <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html"><code>String.format()</code> of Java</a>... etc.</p>
+<p>The formating rule is: </p>
+<pre class="prettyprint source"><code>%    +0        4     .       2                f
+    flag     width       presision     format specifier</code></pre><h3>flags</h3><ul>
+<li><p><code>0</code></p>
+<p>pad with leading zeros rather than spaces;
+for numbers, this moves the padding after the sign</p>
+</li>
+<li><p><code>#</code></p>
+<p>Please see <code>v</code> in “Format Specifier”.</p>
+</li>
+</ul>
+<ul>
+<li><p><code> </code> (space)</p>
+<p>leave a space for elided sign in numbers (% d);
+put spaces between bytes printing strings or slices in hex (% x, % X)</p>
+</li>
+</ul>
+<ul>
+<li><p><code>+</code></p>
+<p>always print a sign for numeric values;
+guarantee ASCII-only output for %q (%+q)</p>
+</li>
+<li><p><code>-</code></p>
+<p>pad with spaces on the right rather than the left (left-justify the field)</p>
+</li>
+</ul>
+<h3>Format Specifier</h3><p><code>sprintf()</code> allows following format specifiers: </p>
+<h4>For Numbers</h4><ul>
+<li><p><code>b</code></p>
+<p>Convert the number to binery number.</p>
+</li>
+<li><p><code>o</code></p>
+<p>Convert the number to octal numeral.</p>
+</li>
+<li><p><code>d</code></p>
+<p>Convert the number to decimal integer.</p>
+</li>
+<li><p><code>x</code></p>
+<p>Convert the number to hexadecimal number (lower case).</p>
+</li>
+<li><p><code>X</code></p>
+<p>Convert the number to hexadecimal number (upper case).</p>
+</li>
+<li><p><code>e</code></p>
+<p>Expressing the number by scientific notation (lower case).</p>
+</li>
+<li><p><code>E</code></p>
+<p>Expressing the number by scientific notation (upper case).</p>
+</li>
+<li><p><code>f</code> / <code>F</code></p>
+<p>Convert the number to a float number.</p>
+</li>
+</ul>
+<ul>
+<li><p><code>g</code></p>
+<p>Convert the number. If it is a large exponents, it is same as <code>%e</code>. Otherwise <code>%f</code>.</p>
+</li>
+<li><p><code>G</code></p>
+<p>Convert the number. If it is a large exponents, it is same as <code>%E</code>. Otherwise <code>%f</code>.</p>
+</li>
+<li><p><code>U</code></p>
+<p>Expressing the number by unicode format (upper case).
+For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%U&quot;, 6896)    // return &quot;U+1AF0&quot;</code></pre></li>
+<li><p><code>c</code></p>
+<p>If the argument is a number, it will be seen as a char code and be converted to the char;
+If it is a string, it will return the first char of the string.</p>
+<p>For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%c&quot;, 65)    // return &quot;A&quot;
+sprintf(&quot;%c&quot;, &quot;ABC&quot;)    // return &quot;A&quot;</code></pre></li>
+</ul>
+<h4>For String</h4><ul>
+<li><p><code>s</code></p>
+<p>Expressing the argument as a string</p>
+</li>
+<li><p><code>q</code></p>
+<p>If the argument is a number, a single-quoted character literal safely escaped (same as <code>sprintf(&quot;'%c'&quot;, arugment)</code>).
+Otherwise, if it is a string, return a double-quoted string safely escaped (same as <code>sprintf(&quot;\&quot;%c\&quot;&quot;, argument)</code>).</p>
+<p>For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%q&quot;, 100)    // return &quot;'d'&quot;
+sprintf(&quot;%q&quot;, &quot;d&quot;)    // return &quot;\&quot;d\&quot;&quot;</code></pre></li>
+</ul>
+<h4>For Boolean</h4><ul>
+<li><p><code>t</code></p>
+<p>Expressing a boolean.</p>
+</li>
+</ul>
+<h4>Others</h4><ul>
+<li><p><code>T</code></p>
+<p>Return the type of the argument. If the argument is an object, it will return the name of its constructor.</p>
+<p>For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%T&quot;, 123)    // return &quot;number&quot;
+sprintf(&quot;%T&quot;, 123.4)    // return &quot;number&quot;
+sprintf(&quot;%T&quot;, &quot;123&quot;)    // return &quot;string&quot;
+sprintf(&quot;%T&quot;, true)    // return &quot;boolean&quot;
+sprintf(&quot;%T&quot;, {a: 123})    // return &quot;Object&quot;
+sprintf(&quot;%T&quot;, [1, 23])    // return &quot;Array&quot;</code></pre></li>
+<li><p><code>v</code></p>
+<p>Return the argument in default format</p>
+<p>The default format is:</p>
+<ul>
+<li>decimal integer: <code>d</code></li>
+<li>float: <code>f</code></li>
+<li>string: <code>s</code></li>
+<li><p>Object: </p>
+<ul>
+<li>If it is with <code>#</code> flag (<code>%#v</code>), convert the argument in JSON format</li>
+<li>Otherwise, return the value of the argument’s <code>toString()</code>.</li>
+</ul>
+</li>
+</ul>
+<p>For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%v&quot;, 123)             // return &quot;123&quot;
+sprintf(&quot;%v&quot;, 123.456)         // return &quot;123.4000&quot;
+sprintf(&quot;%v&quot;, &quot;Test&quot;)          // return &quot;Test&quot;
+sprintf(&quot;%v&quot;, {a:123, b:456})  // return &quot;[object Object]&quot;
+sprintf(&quot;%v&quot;, {
+ a:123, 
+ b:456,
+ toString: function(){
+     return &quot;[MyObject]&quot;
+ }
+})                             // return &quot;[MyObject]&quot;
+sprintf(&quot;%#v&quot;, {a:123, b:456}) // return &quot;{&quot;a&quot;:123,&quot;b&quot;:456}&quot;</code></pre></li>
+</ul>
+<h3>Explicit argument indexes</h3><p>The default behavior is for each formatting verb to format successive arguments passed in the call. However, the notation <code>[]</code> immediately before the verb indicates that the nth one-indexed argument is to be formatted instead. For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%[2]d&quot;, 11, 22)    // return &quot;22&quot;</code></pre><p>The notation before a '<em>' (`[]</em>`) for a width or precision selects the argument index holding the value.
+For instance: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%[2]*.[4]*[3]f&quot;, 11, 12, 13.123, 14, 15)</code></pre><p>It is the same as</p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%12.14[3]f&quot;)</code></pre><p>Also, after processing a bracketed expression [n], subsequent verbs will use arguments n+1, n+2, etc. unless otherwise directed.
+For example: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%[2]d    %d&quot;, 100, 200, 300)</code></pre><p>It is the same as following code: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%[2]d    %[3]d&quot;, 100, 200, 300)</code></pre><p>For setting width or precision: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%[2]*d&quot;, 100, 200, 300)</code></pre><p>It is the same as following code: </p>
+<pre class="prettyprint source lang-javascript"><code>sprintf(&quot;%[2]*[3]d&quot;, 100, 200, 300)</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Thu Aug 25 2016 22:40:37 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
