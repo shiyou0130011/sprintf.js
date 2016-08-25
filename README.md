@@ -11,7 +11,7 @@ Note: This project is not a javascript model project. To use it please add the f
 <script src="/path/of/sprintf.js"></script>
 ```
 
-## 語法
+## Printing
 
 ``` javascript
 sprintf(formatedString, …args)
@@ -195,12 +195,12 @@ The formating rule is:
 	```
 		 
 
-### 指定參數
+### Explicit argument indexes
 
-通常來講，參數都是從第一個照順序取得，但可以用 `[]` 來指定輸出的參數，例如：
+The default behavior is for each formatting verb to format successive arguments passed in the call. However, the notation `[]` immediately before the verb indicates that the nth one-indexed argument is to be formatted instead. For example: 
 
 ``` javascript
-sprintf("%[2]d", 11, 22)
+sprintf("%[2]d", 11, 22)	// return "22"
 ```
 
 上例中， `[2]` 表示輸出的參數為第 2 個參數。
