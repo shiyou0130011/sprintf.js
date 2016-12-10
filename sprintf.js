@@ -82,14 +82,13 @@ function sprintf(formatedString) {
 	
 	formatedString = formatedString.replace(replaceReg, function(format, formatIndex, formatedStr){
 		if(format == "%"){
-			return errorMessage("NOVERB")
 		}
 		
 		/** @type FormatKeyword */
 		var formatKeyWord = format.charAt(format.length - 1)	
 		
 		if(!formatKeyWord.match(formatKeyWordsReg)){
-			return errorMessage("WRONG FORMAT", formatKeyWord)
+			return errorMessage("Wrong Format", formatKeyWord)
 		}
 		
 		if(formatKeyWord == "%"){
@@ -141,22 +140,22 @@ function sprintf(formatedString) {
 			    rightBracketIndex = width.indexOf("]")
 			
 			if(leftBracketIndex > starIndex || rightBracketIndex > starIndex || rightBracketIndex + 1 != starIndex){
-				return errorMessage("MISSING INDEX", formatKeyWord)
+				return errorMessage("Missing Index", formatKeyWord)
 			}
 			
 			var explicitArgIndex = width.substr(leftBracketIndex + 1, rightBracketIndex - leftBracketIndex - 1)
 			if(isNaN(Number(explicitArgIndex)) || Number(explicitArgIndex) < 1 || Number(explicitArgIndex) != parseInt(explicitArgIndex)){
-				return errorMessage("BAD WIDTH", formatKeyWord)
+				return errorMessage("Bad Width", formatKeyWord)
 			}
 			
 			if(explicitArgIndex >= args.length){
-				return errorMessage("BAD PRECISION", formatKeyWord)
+				return errorMessage("Bad Precision", formatKeyWord)
 			}
 			
 			argIndex = explicitArgIndex
 			
 			if(isNaN(Number(args[argIndex])) || Number(args[argIndex]) < 1 || Number(args[argIndex]) != parseInt(args[argIndex])){
-				return errorMessage("BAD PRECISION", formatKeyWord, args[argIndex])
+				return errorMessage("Bad Precision", formatKeyWord, args[argIndex])
 			}
 			
 			// replace the width
@@ -179,7 +178,7 @@ function sprintf(formatedString) {
 			var explicitArgIndex = width.substr(leftBracketIndex + 1, rightBracketIndex - leftBracketIndex - 1)
 			
 			if(isNaN(explicitArgIndex) || explicitArgIndex >= args.length || Number(explicitArgIndex) != parseInt(explicitArgIndex)){
-				return errorMessage("BAD INDEX", formatKeyWord, explicitArgIndex)
+				return errorMessage("Bad Index", formatKeyWord, explicitArgIndex)
 			}
 			
 			argIndex = Number(explicitArgIndex)
@@ -193,12 +192,12 @@ function sprintf(formatedString) {
 		}else{
 			argIndex++
 			if(argIndex >= args.length){
-				return errorMessage("BAD INDEX", formatKeyWord)
+				return errorMessage("Bad Index", formatKeyWord)
 			}
 		}
 		
 		if(width.search(/[^\d\.]/g) >= 0){
-			return errorMessage("BAD WIDTH", formatKeyWord, width)
+			return errorMessage("Bad Width", formatKeyWord, width)
 		}
 		
 		/** 要格式化的 Argument */
@@ -228,14 +227,14 @@ function sprintf(formatedString) {
 			case "F":
 				// float
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				try{
 					// JS 要 +1 ，因為 JS的精確度算法和 golang不同
 					// 例如 Math.PI.toPrecision(2)，JS會是 "3.1"； golang會是 "3.14"
 					formatArgument = (Number(formatArgument) >= 0 && fmt.plus? "+": "") + parseFloat(formatArgument).toPrecision(precision + 1)
 				}catch(error){
-					return errorMessage("BAD PRECISION", formatArgument, precision)
+					return errorMessage("Bad Precision", formatArgument, precision)
 				}
 				
 				break
@@ -243,7 +242,12 @@ function sprintf(formatedString) {
 				// type of value
 				if(typeof formatArgument == "object"){
 					// if argument is an Object, return the name of its' constructor
-					formatArgument = formatArgument.constructor.name
+					if(formatArgument.constructor.name == ""){
+						formatArgument = "class anonymous"
+					}else{
+						formatArgument = "class " + formatArgument.constructor.name	
+					}
+					
 				}else{
 					formatArgument = typeof formatArgument
 				}
@@ -251,7 +255,7 @@ function sprintf(formatedString) {
 			case "U":
 				// Unicode format. E.g. U+12AB
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				// the hex of the Argument 
 				var hexOfArg = parseInt(formatArgument).toString(16).toUpperCase()
@@ -261,7 +265,7 @@ function sprintf(formatedString) {
 			case "b":
 				// 2進制
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				formatArgument = (Number(formatArgument) >= 0 && fmt.plus? "+": "") + Number(formatArgument).toString(2)
 				
@@ -276,21 +280,21 @@ function sprintf(formatedString) {
 						return errorMessage("Empty Character", formatKeyWord, formatArgument)
 					}
 				}else{
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				
 				break
 			case "d":
 				// 10進制整數
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				formatArgument = (Number(formatArgument) >= 0 && fmt.plus? "+": "") + parseInt(formatArgument)
 				break
 			case "o":
 				// 8進制
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				formatArgument = (Number(formatArgument) >= 0 && fmt.plus? "+": "") + Number(formatArgument).toString(8)
 				
@@ -299,7 +303,7 @@ function sprintf(formatedString) {
 			case "X":
 				// 16進制
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				formatArgument = (Number(formatArgument) >= 0 && fmt.plus? "+": "") + Number(formatArgument).toString(16)
 				
@@ -311,12 +315,12 @@ function sprintf(formatedString) {
 			case "E":
 				// 轉為科學計數法表示的數字，例如：1.024e3
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				try{
 					formatArgument = (Number(formatArgument) >= 0 && fmt.plus? "+": "") + parseFloat(formatArgument).toExponential(precision)
 				}catch(error){
-					return errorMessage("BAD PRECISION", formatArgument, precision)
+					return errorMessage("Bad Precision", formatArgument, precision)
 				}
 				
 				if(formatKeyWord == "E"){
@@ -328,7 +332,7 @@ function sprintf(formatedString) {
 				// 當數字 >= 1000000 ，等同 %e / %E
 				// 反之等同 %d / %f
 				if(isNaN(Number(formatArgument))){
-					return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+					return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 				}
 				if(Number(formatArgument) >= 1000000){
 					//TODO
@@ -354,7 +358,7 @@ function sprintf(formatedString) {
 						formatArgument = "\"" + formatArgument + "\""
 						break
 					default:
-						return errorMessage("WRONG TYPE", formatKeyWord, formatArgument)
+						return errorMessage("Wrong Type", formatKeyWord, formatArgument)
 						break
 				}
 				break
