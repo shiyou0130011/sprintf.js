@@ -82,6 +82,7 @@ function sprintf(formatedString) {
 	
 	formatedString = formatedString.replace(replaceReg, function(format, formatIndex, formatedStr){
 		if(format == "%"){
+			return errorMessage("No Variable")
 		}
 		
 		/** @type FormatKeyword */
